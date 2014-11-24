@@ -45,6 +45,8 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+
+import jscratch.vue.itemlist.ItemCapteur;
 import jscratch.vue.widgets.modeles.zones.ListeDeroulante;
 import nxtim.instruction.Capteur;
 import nxtim.instruction.CapteurSlot;
@@ -56,7 +58,7 @@ import nxtim.instruction.InstructionConfigCapteurs;
  */
 public class ConfigurationCapteursWidget extends ModeleWidget {
 
-	private ListeDeroulante<Capteur> l1, l2, l3, l4;
+	private ListeDeroulante<ItemCapteur> l1, l2, l3, l4;
 	
 	/**
 	 * Constructeur par défaut de <code>CapteursConfigurationWidget</code>.
@@ -83,19 +85,20 @@ public class ConfigurationCapteursWidget extends ModeleWidget {
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 		int widthChamp = 70;
-		l1 = new ListeDeroulante<Capteur>(Capteur.values(), this);
+		final ItemCapteur[] itemsCapteur = ItemCapteur.itemsCapteur();
+		l1 = new ListeDeroulante<ItemCapteur>(itemsCapteur, this);
 		l1.setBounds(85, 3, widthChamp, 20);
 		this.getLesZonesSaisies().add(l1);
 		
-		l2 = new ListeDeroulante<Capteur>(Capteur.values(), this);
+		l2 = new ListeDeroulante<ItemCapteur>(itemsCapteur, this);
 		l2.setBounds(160, 3, widthChamp, 20);
 		this.getLesZonesSaisies().add(l2);
 		
-		l3 = new ListeDeroulante<Capteur>(Capteur.values(), this);
+		l3 = new ListeDeroulante<ItemCapteur>(itemsCapteur, this);
 		l3.setBounds(235, 3, widthChamp, 20);
 		this.getLesZonesSaisies().add(l3);
 		
-		l4 = new ListeDeroulante<Capteur>(Capteur.values(), this);
+		l4 = new ListeDeroulante<ItemCapteur>(itemsCapteur, this);
 		l4.setBounds(310, 3, widthChamp, 20);
 		this.getLesZonesSaisies().add(l4);
 		
@@ -105,37 +108,37 @@ public class ConfigurationCapteursWidget extends ModeleWidget {
 	@Override
 	public void initListeners() {
 		l1.addItemListener(new ItemListener() {
-
 				@Override
 				public void itemStateChanged(ItemEvent e) {
 					InstructionConfigCapteurs ins = (InstructionConfigCapteurs)getElementProgramme();
-					ins.setCapteurAuSlot(CapteurSlot.A, (Capteur)l1.getSelectedItem());
+					ItemCapteur item = (ItemCapteur)l1.getSelectedItem();
+					ins.setCapteurAuSlot(CapteurSlot.A, item.getCapteur());
 				}
 			});
 		l2.addItemListener(new ItemListener() {
-
 				@Override
 				public void itemStateChanged(ItemEvent e) {
 					InstructionConfigCapteurs ins = (InstructionConfigCapteurs)getElementProgramme();
-					ins.setCapteurAuSlot(CapteurSlot.B, (Capteur)l2.getSelectedItem());
+					ItemCapteur item = (ItemCapteur)l2.getSelectedItem();
+					ins.setCapteurAuSlot(CapteurSlot.B, item.getCapteur());
 				}
 			});
 		
 		l3.addItemListener(new ItemListener() {
-
 				@Override
 				public void itemStateChanged(ItemEvent e) {
 					InstructionConfigCapteurs ins = (InstructionConfigCapteurs)getElementProgramme();
-					ins.setCapteurAuSlot(CapteurSlot.C, (Capteur)l3.getSelectedItem());
+					ItemCapteur item = (ItemCapteur)l3.getSelectedItem();
+					ins.setCapteurAuSlot(CapteurSlot.C, item.getCapteur());
 				}
 			});
 		
 		l4.addItemListener(new ItemListener() {
-
 				@Override
 				public void itemStateChanged(ItemEvent e) {
 					InstructionConfigCapteurs ins = (InstructionConfigCapteurs)getElementProgramme();
-					ins.setCapteurAuSlot(CapteurSlot.D, (Capteur)l4.getSelectedItem());
+					ItemCapteur item = (ItemCapteur)l4.getSelectedItem();
+					ins.setCapteurAuSlot(CapteurSlot.D, item.getCapteur());
 				}
 			});
 	}
