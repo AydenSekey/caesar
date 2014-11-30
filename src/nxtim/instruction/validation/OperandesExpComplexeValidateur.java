@@ -73,15 +73,20 @@ public class OperandesExpComplexeValidateur implements ExpressionComplexeValidat
 			switch(o) {
 				case EGALITE:
 					break;
+				case AFFECTATION:
+					break;
 				default:
-					//opérateur ne doivent pas être booléens
+					// opérateur arithmétique
+					// les opérandes ne doivent pas être booléens
 					if(exp.getMembreDroit() != null && exp.getMembreDroit().isBooleenne()) {
-						TypeElement type = exp.getMembreDroit().getType();//Noter le type posant problème
-						throw new NXTIMBadTypeElementException(type, "Opérateur de condition (" + exp.getOperateur() + ") invalide avec ce type.");
+                        //Noter le type posant problème
+						TypeElement type = exp.getMembreDroit().getType();
+						throw new NXTIMBadTypeElementException(type, "Opérateur (" + exp.getOperateur() + ") invalide avec ce type.");
 					}
 					if(exp.getMembreGauche() != null && exp.getMembreGauche().isBooleenne()) {
-						TypeElement type = exp.getMembreGauche().getType();//Noter le type posant problème
-						throw new NXTIMBadTypeElementException(type, "Opérateur de condition (" + exp.getOperateur() + ") invalide avec ce type.");
+						//Noter le type posant problème
+						TypeElement type = exp.getMembreGauche().getType();
+						throw new NXTIMBadTypeElementException(type, "Opérateur (" + exp.getOperateur() + ") invalide avec ce type.");
 					}
 					break;
 			}

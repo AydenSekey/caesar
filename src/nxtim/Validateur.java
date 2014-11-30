@@ -123,6 +123,14 @@ public class Validateur implements VisiteurElementProg {
 	}
 	
 	/**
+	 * Donne le nombre d'erreurs détectées par le validateur.
+	 * 
+	 * @return le nombre d'erreurs détectées.
+	 */
+	public int nbErreurs() {
+		return erreurs.size();
+	}
+	/**
 	 * Donne un itérateur sur les erreurs.
 	 * 
 	 * @return l'itérateur.
