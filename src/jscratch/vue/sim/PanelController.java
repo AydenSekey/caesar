@@ -192,10 +192,10 @@ public class PanelController extends JPanel {
 				this.stop();
 				simulation.stopThread();
 			}
-			else if (e.getActionCommand() == "PointsCapteurs") {
+			else if ("PointsCapteurs".equals(e.getActionCommand())) {
 				panelSimulator.getRobotRenderer().setCapteurs(!panelSimulator.getRobotRenderer().getCapteurs());
 			}
-			else if (e.getActionCommand() == "PointsCollisions") {
+			else if ("PointsCollisions".equals(e.getActionCommand())) {
 				panelSimulator.getRobotRenderer().setCollisions(!panelSimulator.getRobotRenderer().getCollisions());
 			}
 		}
