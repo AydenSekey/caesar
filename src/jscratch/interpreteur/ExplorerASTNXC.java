@@ -46,8 +46,6 @@ import org.antlr.runtime.tree.Tree;
 
 /**
  * Explorateur d'un arbre syntaxique d'ANTLR pour un code NXC.
- * 
- * @author Adrien DUROY
  */
 public class ExplorerASTNXC {
     private final Object mutexMonteur;
@@ -74,6 +72,7 @@ public class ExplorerASTNXC {
                     exploration(tree.getChild(i));
                 }
                 System.out.println("Fin (ROOT atteint)");
+                break;
             case NXCParser.TASK_DEFINITION:
                 traitementTache(tree, nbChild);
                 break;
