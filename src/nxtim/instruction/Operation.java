@@ -41,6 +41,8 @@ termes.
  */
 package nxtim.instruction;
 
+import nxtim.exception.NXTIMBadOperateurException;
+
 /**
  * Expression arithmétique.
  */
@@ -52,12 +54,12 @@ public class Operation extends ExpressionComplexe {
 	 * @param operation l'opérateur de l'opération
 	 * @param membreGauche le membre de gauche
 	 * @param membreDroit le membre de droit
-	 * @throws RuntimeException Si l'opérateur fourni n'est pas un opérateur arithmétique
+	 * @throws NXTIMBadOperateurException Si l'opérateur fourni n'est pas un opérateur arithmétique
 	 */
 	public Operation(final Operateur operation, final Operation membreGauche, final Operation membreDroit) {
 		super(operation, membreGauche, membreDroit);
 		if (!Operateur.isArithmetique(operation)) {
-			throw new RuntimeException("Opérateur non arithméthique dans Operation.");
+			throw new NXTIMBadOperateurException(operation, "Opérateur non arithméthique dans Operation.");
 		}
 	}
 
@@ -67,12 +69,12 @@ public class Operation extends ExpressionComplexe {
 	 * @param operation l'opérateur de l'opération
 	 * @param membreGauche le membre de gauche
 	 * @param membreDroit le membre de droite
-	 * @throws RuntimeException Si l'opérateur fourni n'est pas un opérateur arithmétique
+	 * @throws NXTIMBadOperateurException Si l'opérateur fourni n'est pas un opérateur arithmétique
 	 */
 	public Operation(final Operateur operation, final Variable membreGauche, final Variable membreDroit) {
 		super(operation, membreGauche, membreDroit);
 		if (!Operateur.isArithmetique(operation)) {
-			throw new RuntimeException("Opérateur non arithméthique dans Operation.");
+			throw new NXTIMBadOperateurException(operation, "Opérateur non arithméthique dans Operation.");
 		}
 	}
 
@@ -82,12 +84,12 @@ public class Operation extends ExpressionComplexe {
 	 * @param operation l'opérateur de l'opération
 	 * @param membreGauche le membre de gauche
 	 * @param membreDroit le membre de droite
-	 * @throws RuntimeException Si l'opérateur fourni n'est pas un opérateur arithmétique
+	 * @throws NXTIMBadOperateurException Si l'opérateur fourni n'est pas un opérateur arithmétique
 	 */
 	public Operation(final Operateur operation, final Operation membreGauche, final Variable membreDroit) {
 		super(operation, membreGauche, membreDroit);
 		if (!Operateur.isArithmetique(operation)) {
-			throw new RuntimeException("Opérateur non arithméthique dans Operation.");
+			throw new NXTIMBadOperateurException(operation, "Opérateur non arithméthique dans Operation.");
 		}
 	}
 
@@ -97,12 +99,12 @@ public class Operation extends ExpressionComplexe {
 	 * @param operation l'opérateur de l'opération
 	 * @param membreGauche le membre gauche
 	 * @param membreDroit le membre de droite
-	 * @throws RuntimeException Si l'opérateur fourni n'est pas un opérateur arithmétique
+	 * @throws NXTIMBadOperateurException Si l'opérateur fourni n'est pas un opérateur arithmétique
 	 */
 	public Operation(final Operateur operation, final Variable membreGauche, final Operation membreDroit) {
 		super(operation, membreGauche, membreDroit);
 		if (!Operateur.isArithmetique(operation)) {
-			throw new RuntimeException("Opérateur non arithméthique dans Operation.");
+			throw new NXTIMBadOperateurException(operation, "Opérateur non arithméthique dans Operation.");
 		}
 	}
 
@@ -113,8 +115,7 @@ public class Operation extends ExpressionComplexe {
 
 	@Override
 	public Categorie getCategorie() {
-		// TODO Auto-generated method stub
-		return null;
+		return Categorie.EXPRESSIONS;
 	}
 
 	@Override

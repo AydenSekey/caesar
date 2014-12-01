@@ -57,4 +57,15 @@ public class TestNXTIM {
 		assertTrue("L'ancien membre a été écrasé par à cause de l'élément incorrecte", membreDroit == con.getMembreDroit());
 	}
 
+	@Test
+	public void testOperationExceptionConstruction() {
+		boolean exception = false;
+		try {
+			Operation op = new Operation(Operateur.EGALITE, new VariableModifiable(TypeElement.INT, "var"), new VariableModifiable(TypeElement.INT, "var2"));
+		} catch (NXTIMBadOperateurException e) {
+			assertEquals("Opérateur incorrecte.", Operateur.EGALITE, e.getOperateur());
+			exception = true;
+		}
+		assertTrue("Une NXTIMBadOperateurException devrait être levée.", exception);
+	}
 }
