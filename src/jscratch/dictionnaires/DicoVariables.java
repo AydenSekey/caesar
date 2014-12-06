@@ -51,24 +51,8 @@ import nxtim.instruction.Variable;
 
 /**
  * Cette classe représente un dictionnaire de variables.
- * 
- * @since 1.0
- * @version 1.0
  */
 public final class DicoVariables {
-
-	/**
-	 * L'instance de <code>DicoVars</code>.
-	 */
-	private static DicoVariables instance;
-	/**
-	 * L'instance de <code>DicoVars</code> pour l'interpréteur.
-	 */
-	private static DicoVariables instanceInterp;
-	/**
-	 * L'instance de <code>DicoVars</code> pour l'interpréteur.
-	 */
-	private static DicoVariables instanceExec;
 	/**
 	 * Les différentes variables.
 	 */
@@ -76,8 +60,6 @@ public final class DicoVariables {
 
 	/**
 	 * Crée un nouveau dictionnaire de variables.
-	 * 
-	 * @since 1.0
 	 */
 	public DicoVariables() {
 		dictionnaire = new HashMap<String, Variable>();
@@ -85,8 +67,6 @@ public final class DicoVariables {
 
 	/**
 	 * Ajouter la variable dans le dictionnaire.
-	 *
-	 * @since 1.0
 	 * 
 	 * @param v la variable à ajouter
 	 */
@@ -99,8 +79,6 @@ public final class DicoVariables {
 	/**
 	 * Supprimer la variable portant le nom.
 	 *
-	 * @since 1.0
-	 * 
 	 * @param nom le nom de la variable
 	 */
 	public void supprimer(final String nom) {
@@ -110,8 +88,6 @@ public final class DicoVariables {
 	/**
 	 * Récupère toutes les variables du type voulu.
 	 *
-	 * @since 1.0
-	 * 
 	 * @param type le type de variable désiré
 	 * @return les variables du type désiré
 	 */
@@ -128,8 +104,6 @@ public final class DicoVariables {
 	/**
 	 * Récupère toutes les variables du dictionnaire.
 	 *
-	 * @since 1.0
-	 * 
 	 * @return les variables du dictionnaire
 	 */
 	public Variable[] getLesVariables() {
