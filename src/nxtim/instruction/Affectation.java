@@ -41,6 +41,7 @@ termes.
  */
 package nxtim.instruction;
 
+import nxtim.type.TypeElement;
 /**
  * Modèle d'une affectation.
  */

@@ -7,8 +7,7 @@ import nxtim.instruction.CapteurSlot;
 import nxtim.instruction.InstructionConfigCapteurs;
 import nxtim.instruction.InstructionDeclaration;
 import nxtim.instruction.InstructionTache;
-import nxtim.instruction.TypeElement;
-import nxtim.instruction.VariableConstante;
+import nxtim.type.TypeElement;
 import nxtim.instruction.VariableModifiable;
 
 import org.junit.Test;

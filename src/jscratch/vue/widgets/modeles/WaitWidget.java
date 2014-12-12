@@ -50,7 +50,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
 import nxtim.instruction.InstructionAttente;
-import nxtim.instruction.TypeElement;
+import nxtim.type.TypeElement;
 import nxtim.instruction.VariableConstante;
 import nxtim.instruction.VariableModifiable;
 

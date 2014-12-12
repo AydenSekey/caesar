@@ -42,6 +42,7 @@ termes.
 package nxtim.instruction;
 
 import nxtim.exception.NXTIMBadTypeElementException;
+import nxtim.type.TypeElement;
 
 /**
  * Cette instruction définit une incrémentation ou une décrémentation

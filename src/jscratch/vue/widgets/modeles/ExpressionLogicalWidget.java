@@ -54,7 +54,7 @@ import jscratch.vue.widgets.Widget;
 import nxtim.instruction.Condition;
 import nxtim.instruction.Expression;
 import nxtim.instruction.Operateur;
-import nxtim.instruction.TypeElement;
+import nxtim.type.TypeElement;
 import nxtim.instruction.VariableConstante;
 
 /**

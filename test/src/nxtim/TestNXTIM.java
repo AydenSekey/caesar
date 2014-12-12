@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 import nxtim.exception.NXTIMBadOperateurException;
 import nxtim.exception.NXTIMBadTypeElementException;
 import nxtim.instruction.*;
+import nxtim.type.TypeElement;
 
 public class TestNXTIM {
 	

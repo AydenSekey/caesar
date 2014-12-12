@@ -3,7 +3,7 @@ package caesar.traduction;
 import static org.junit.Assert.*;
 import jscratch.traduction.VisiteurC;
 import nxtim.instruction.InstructionDeclaration;
-import nxtim.instruction.TypeElement;
+import nxtim.type.TypeElement;
 import nxtim.instruction.Variable;
 import nxtim.instruction.VariableConstante;
 import nxtim.instruction.VariableModifiable;

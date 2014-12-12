@@ -41,6 +41,8 @@ termes.
  */
 package nxtim.instruction;
 
+import nxtim.type.TypeElement;
+
 /**
  * Variable constante ou valeur.
  */

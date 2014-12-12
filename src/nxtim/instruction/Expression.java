@@ -41,6 +41,8 @@ termes.
  */
 package nxtim.instruction;
 
+import nxtim.type.TypeElement;
+
 /**
  * Une expression est un morceau de code d'un programme qui donne une valeur et qui n'est pas nécessairement une instruction.
  * <ul>

@@ -53,7 +53,7 @@ import jscratch.vue.widgets.WidgetCompose;
 import jscratch.vue.widgets.fabrique.FabriqueWidgets;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 import jscratch.vue.widgets.modeles.zones.Zone;
-import nxtim.instruction.TypeElement;
+import nxtim.type.TypeElement;
 import nxtim.instruction.Variable;
 import nxtim.instruction.VariableModifiable;
 import org.jdom2.Document;

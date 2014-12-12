@@ -41,6 +41,8 @@ termes.
  */
 package nxtim.instruction;
 
+import nxtim.type.TypeElement;
+
 /**
  * Expression donnant la valeur courante d'un capteur à partir de son slot.
  */

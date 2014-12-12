@@ -44,7 +44,7 @@ package nxtim;
 import static org.junit.Assert.*;
 import nxtim.instruction.Affectation;
 import nxtim.instruction.InstructionTache;
-import nxtim.instruction.TypeElement;
+import nxtim.type.TypeElement;
 import nxtim.instruction.VariableModifiable;
 
 import org.junit.Test;

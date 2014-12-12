@@ -54,7 +54,7 @@ import jscratch.vue.widgets.modeles.zones.ListeDeroulante;
 import nxtim.instruction.Expression;
 import nxtim.instruction.InstructionMoteurMov;
 import nxtim.instruction.Moteur;
-import nxtim.instruction.TypeElement;
+import nxtim.type.TypeElement;
 import nxtim.instruction.VariableConstante;
 
 /**

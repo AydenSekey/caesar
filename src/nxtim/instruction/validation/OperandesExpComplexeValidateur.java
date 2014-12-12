@@ -44,7 +44,7 @@ package nxtim.instruction.validation;
 import nxtim.exception.NXTIMBadTypeElementException;
 import nxtim.instruction.ExpressionComplexe;
 import nxtim.instruction.Operateur;
-import nxtim.instruction.TypeElement;
+import nxtim.type.TypeElement;
 
 /**
  * Validateur de cohérances des opérandes d'une expression complexe selon l'opérateur.

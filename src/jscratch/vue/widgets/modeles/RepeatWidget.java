@@ -53,7 +53,7 @@ import java.awt.Rectangle;
 import jscratch.parametrages.properties.VariableProperties;
 import nxtim.instruction.Expression;
 import nxtim.instruction.InstructionRepeat;
-import nxtim.instruction.TypeElement;
+import nxtim.type.TypeElement;
 import nxtim.instruction.VariableConstante;
 
 /**

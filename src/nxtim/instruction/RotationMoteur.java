@@ -41,6 +41,8 @@ termes.
  */
 package nxtim.instruction;
 
+import nxtim.type.TypeElement;
+
 /**
  * Expression donnant le nombre de rotation d'un moteur.
  * 

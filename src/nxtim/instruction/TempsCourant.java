@@ -41,6 +41,8 @@ termes.
  */
 package nxtim.instruction;
 
+import nxtim.type.TypeElement;
+
 /**
  * Instruction donnant le temps écoulé depuis le lancement du programme.
  *

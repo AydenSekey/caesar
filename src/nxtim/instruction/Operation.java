@@ -42,6 +42,7 @@ termes.
 package nxtim.instruction;
 
 import nxtim.exception.NXTIMBadOperateurException;
+import nxtim.type.TypeElement;
 
 /**
  * Expression arithmétique.

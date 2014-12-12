@@ -53,7 +53,7 @@ import jscratch.vue.widgets.modeles.zones.ChampTexte;
 import nxtim.instruction.Expression;
 import nxtim.instruction.Operateur;
 import nxtim.instruction.Operation;
-import nxtim.instruction.TypeElement;
+import nxtim.type.TypeElement;
 import nxtim.instruction.Variable;
 import nxtim.instruction.VariableConstante;
 

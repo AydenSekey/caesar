@@ -50,7 +50,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import jscratch.dictionnaires.DicoWidgetsCategories;
-import nxtim.instruction.TypeElement;
+import nxtim.type.TypeElement;
 import nxtim.instruction.Variable;
 import nxtim.instruction.VariableModifiable;
 

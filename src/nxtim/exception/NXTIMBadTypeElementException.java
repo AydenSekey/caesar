@@ -41,7 +41,7 @@ termes.
  */
 package nxtim.exception;
 
-import nxtim.instruction.TypeElement;
+import nxtim.type.TypeElement;
 
 /**
  * Exception indiquant qu'un type incorrect est utilisé dans un élément de programme.

@@ -42,6 +42,7 @@ termes.
 package nxtim.instruction;
 
 import nxtim.exception.NXTIMBadTypeElementException;
+import nxtim.type.TypeElement;
 
 /**
  * Expression logique de négation.
