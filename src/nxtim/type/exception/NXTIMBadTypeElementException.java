@@ -39,8 +39,9 @@ Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
 pris connaissance de la licence CeCILL-C, et que vous en avez accepté les
 termes.
  */
-package nxtim.exception;
+package nxtim.type.exception;
 
+import nxtim.exception.NXTIMRuntimeException;
 import nxtim.type.TypeElement;
 
 /**

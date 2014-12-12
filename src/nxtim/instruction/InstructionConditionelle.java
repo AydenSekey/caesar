@@ -41,8 +41,7 @@ termes.
  */
 package nxtim.instruction;
 
-import nxtim.exception.NXTIMBadTypeElementException;
-import nxtim.type.TypeElement;
+import nxtim.type.exception.NXTIMBadTypeElementException;
 
 /**
  * Concept abstrait regroupant toutes les instructions possédant une condition.

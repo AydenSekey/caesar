@@ -41,7 +41,7 @@ termes.
  */
 package nxtim.instruction.validation;
 
-import nxtim.exception.NXTIMBadTypeElementException;
+import nxtim.type.exception.NXTIMBadTypeElementException;
 import nxtim.instruction.ExpressionComplexe;
 import nxtim.instruction.Operateur;
 import nxtim.type.TypeElement;

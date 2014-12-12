@@ -41,7 +41,7 @@ termes.
  */
 package nxtim.instruction;
 
-import nxtim.exception.NXTIMBadTypeElementException;
+import nxtim.type.exception.NXTIMBadTypeElementException;
 import nxtim.type.TypeElement;
 
 /**
