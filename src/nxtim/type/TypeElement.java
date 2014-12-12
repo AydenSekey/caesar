@@ -42,7 +42,7 @@ termes.
 package nxtim.type;
 
 /**
- * Cette énumération donne la liste des différents types possibles pour les variables.
+ * Cette énumération donne la liste des différents types possibles pour les variables, expressions et fonction.
  */
 public enum TypeElement {
 
