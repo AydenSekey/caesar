@@ -59,7 +59,7 @@ import nxtim.instruction.InstructionMoteurMov;
 import nxtim.instruction.InstructionMoteurOff;
 import nxtim.instruction.InstructionTache;
 import nxtim.instruction.InstructionWhile;
-import nxtim.instruction.Operateur;
+import nxtim.operateur.Operateur;
 import nxtim.instruction.Operation;
 import nxtim.type.TypeElement;
 import nxtim.instruction.Variable;

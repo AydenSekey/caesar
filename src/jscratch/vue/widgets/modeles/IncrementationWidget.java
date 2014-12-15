@@ -51,7 +51,7 @@ import jscratch.helpers.FontHelper;
 import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 import nxtim.instruction.InstructionIncrementation;
-import nxtim.instruction.Operateur;
+import nxtim.operateur.Operateur;
 import nxtim.instruction.VariableModifiable;
 
 /**

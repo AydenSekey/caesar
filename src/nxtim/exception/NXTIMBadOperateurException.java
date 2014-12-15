@@ -41,7 +41,7 @@ termes.
  */
 package nxtim.exception;
 
-import nxtim.instruction.Operateur;
+import nxtim.operateur.Operateur;
 
 /**
  * Exception concernant l'utilisation d'un mauvais opérateur dans une expression.

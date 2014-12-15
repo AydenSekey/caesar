@@ -58,7 +58,7 @@ import nxtim.instruction.IElementProgramme;
 import nxtim.instruction.InstructionFor;
 import nxtim.instruction.InstructionIncrementation;
 import nxtim.instruction.NonLogique;
-import nxtim.instruction.Operateur;
+import nxtim.operateur.Operateur;
 import nxtim.type.TypeElement;
 import nxtim.instruction.Variable;
 import nxtim.instruction.VariableConstante;

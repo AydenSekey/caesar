@@ -44,7 +44,7 @@ package jscratch.vue.categories.boutons;
 import jscratch.dictionnaires.DicoWidgetsCategories;
 import jscratch.vue.categories.ModeleCategorie;
 import nxtim.instruction.Categorie;
-import nxtim.instruction.Operateur;
+import nxtim.operateur.Operateur;
 
 import jscratch.vue.ginterface.principales.GUI;
 

@@ -41,7 +41,9 @@ termes.
  */
 package nxtim.instruction;
 
+import nxtim.operateur.Operateur;
 import nxtim.type.TypeElement;
+
 /**
  * Modèle d'une affectation.
  */

@@ -53,7 +53,7 @@ import jscratch.vue.widgets.modeles.ConfigurationCapteursWidget;
 import jscratch.vue.widgets.modeles.DeclarationVariableWidget;
 import nxtim.instruction.Condition;
 import nxtim.instruction.NonLogique;
-import nxtim.instruction.Operateur;
+import nxtim.operateur.Operateur;
 import nxtim.instruction.Operation;
 import nxtim.instruction.VariableModifiable;
 import jscratch.vue.widgets.modeles.DoWhileWidget;

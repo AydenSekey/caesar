@@ -44,6 +44,7 @@ package nxtim.instruction;
 import nxtim.exception.NXTIMRuntimeException;
 import nxtim.instruction.validation.ExpressionComplexeValidateur;
 import nxtim.instruction.validation.OperandesExpComplexeValidateur;
+import nxtim.operateur.Operateur;
 
 /**
  * Expression composée de deux autres expressions avec lesquelles effectuer une opération.<br/>

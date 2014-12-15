@@ -77,7 +77,7 @@ import nxtim.instruction.NonLogique;
 import nxtim.instruction.TempsCourant;
 import nxtim.instruction.InstructionWhile;
 import nxtim.instruction.Moteur;
-import nxtim.instruction.Operateur;
+import nxtim.operateur.Operateur;
 import nxtim.instruction.RotationMoteur;
 import nxtim.instruction.ValeurCapteur;
 import nxtim.instruction.Variable;

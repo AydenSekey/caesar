@@ -43,7 +43,7 @@ package nxtim.instruction.validation;
 
 import nxtim.type.exception.NXTIMBadTypeElementException;
 import nxtim.instruction.ExpressionComplexe;
-import nxtim.instruction.Operateur;
+import nxtim.operateur.Operateur;
 import nxtim.type.TypeElement;
 
 /**
