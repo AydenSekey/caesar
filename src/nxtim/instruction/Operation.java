@@ -41,7 +41,7 @@ termes.
  */
 package nxtim.instruction;
 
-import nxtim.exception.NXTIMBadOperateurException;
+import nxtim.operateur.exception.NXTIMBadOperateurException;
 import nxtim.operateur.Operateur;
 import nxtim.type.TypeElement;
 

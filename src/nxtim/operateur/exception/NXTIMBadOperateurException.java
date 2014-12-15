@@ -39,9 +39,10 @@ Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
 pris connaissance de la licence CeCILL-C, et que vous en avez accepté les
 termes.
  */
-package nxtim.exception;
+package nxtim.operateur.exception;
 
 import nxtim.operateur.Operateur;
+import nxtim.exception.NXTIMRuntimeException;
 
 /**
  * Exception concernant l'utilisation d'un mauvais opérateur dans une expression.
