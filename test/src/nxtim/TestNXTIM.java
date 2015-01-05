@@ -70,4 +70,24 @@ public class TestNXTIM {
 		}
 		assertTrue("Une NXTIMBadOperateurException devrait être levée.", exception);
 	}
+	
+	@Test
+	public void testOperationGetType() {
+		Operation op = new Operation(Operateur.ADDITION, new VariableConstante(TypeElement.INT, "2"), (Variable) null);
+		assertNull("Type de l'operation connu (non null).", op.getType());
+		op.setMembreDroit(new VariableConstante(TypeElement.DOUBLE, "1.1"));
+		assertEquals("Type de l'operation incorrect.", TypeElement.DOUBLE, op.getType());
+	}
+	
+	@Test
+	public void testOperationSetTypePromotionStrategieNull() {
+		Operation op = new Operation(Operateur.ADDITION, new VariableConstante(TypeElement.INT, "2"), (Variable) null);
+		boolean exception = false;
+		try {
+			op.setTypePromotionStrategie(null);
+		} catch(NullPointerException e) {
+			exception = true;
+		}
+		assertTrue("NullPointerException non levée.", exception);
+	}
 }

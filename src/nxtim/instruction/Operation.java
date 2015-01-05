@@ -43,12 +43,15 @@ package nxtim.instruction;
 
 import nxtim.operateur.exception.NXTIMBadOperateurException;
 import nxtim.operateur.Operateur;
+import nxtim.type.DefautTypePromotionStrategie;
 import nxtim.type.TypeElement;
+import nxtim.type.TypePromotionStrategie;
 
 /**
  * Expression arithmétique.
  */
 public class Operation extends ExpressionComplexe {
+	private TypePromotionStrategie typePromotionStrategie;
 
 	/**
 	 * Créé une opération à partir de deux autres.
@@ -63,6 +66,7 @@ public class Operation extends ExpressionComplexe {
 		if (!Operateur.isArithmetique(operation)) {
 			throw new NXTIMBadOperateurException(operation, "Opérateur non arithméthique dans Operation.");
 		}
+		typePromotionStrategie = new DefautTypePromotionStrategie();
 	}
 
 	/**
@@ -78,6 +82,7 @@ public class Operation extends ExpressionComplexe {
 		if (!Operateur.isArithmetique(operation)) {
 			throw new NXTIMBadOperateurException(operation, "Opérateur non arithméthique dans Operation.");
 		}
+		typePromotionStrategie = new DefautTypePromotionStrategie();
 	}
 
 	/**
@@ -93,6 +98,7 @@ public class Operation extends ExpressionComplexe {
 		if (!Operateur.isArithmetique(operation)) {
 			throw new NXTIMBadOperateurException(operation, "Opérateur non arithméthique dans Operation.");
 		}
+		typePromotionStrategie = new DefautTypePromotionStrategie();
 	}
 
 	/**
@@ -108,6 +114,7 @@ public class Operation extends ExpressionComplexe {
 		if (!Operateur.isArithmetique(operation)) {
 			throw new NXTIMBadOperateurException(operation, "Opérateur non arithméthique dans Operation.");
 		}
+		typePromotionStrategie = new DefautTypePromotionStrategie();
 	}
 
 	@Override
@@ -133,42 +140,32 @@ public class Operation extends ExpressionComplexe {
 	}
 	
 	/**
+	 * Modifie la stratégie de promotion de type.<br />
+	 * Cette stratégie est utilisée pour la détermination du type de l'expression arithmétique. Par défaut elle est de type {@link DefautTypePromotionStrategie}.
+	 * @param strategie la nouvelle stratégie de promotion de type. Ne doit pas être <code>null</code>.
+	 * @throws NullPointerException si <code>null</code> est fourni en paramètre.
+	 */
+	public void setTypePromotionStrategie(TypePromotionStrategie strategie) {
+		if(strategie != null) {
+			typePromotionStrategie = strategie;
+		} else {
+			throw new NullPointerException("la stratégie de promotion de type ne doit par être null.");
+		}
+	}
+	
+	/**
 	 * Donne le type acceptant deux autres.
 	 * 
 	 * @param e1 le premier type
 	 * @param e2 le second type
-	 * @return le type minimal pouvant recevoir les deux autres.
+	 * @return le type minimal pouvant recevoir les deux autres ou null s'il n'y en a pas.
 	 */
-	private static TypeElement choixDuType(TypeElement e1, TypeElement e2) {
-		//Si même type pas de soucis
-		if(e1 == e2) {
+	private TypeElement choixDuType(TypeElement e1, TypeElement e2) {
+		if(typePromotionStrategie.isPromouvableEn(e1, e2)) {
+			return e2;
+		} else if(typePromotionStrategie.isPromouvableEn(e2, e1)) {
 			return e1;
 		}
-		//Si type différent => conversion possible ?
-		switch(e1) {
-			case BOOL:
-				return TypeElement.BOOL;
-			case DOUBLE:
-				return TypeElement.DOUBLE;
-			case FLOAT:
-				if(e2 == TypeElement.DOUBLE)
-					return TypeElement.DOUBLE;
-				return TypeElement.FLOAT;
-			case SHORT:
-				if(e2 == TypeElement.INT)
-					return TypeElement.INT;
-				//Sinon même chose que si e1 est INT
-			case INT:
-				switch(e2) {
-					case FLOAT:
-					case DOUBLE:
-						return e2;
-					default:
-						break;
-				}
-				return null;
-			default:
-				return null;
-		}
+		return null;
 	}
 }
