@@ -10,6 +10,7 @@ jscratch.exceptions
 jscratch.helpers
 jscratch.interpreteur
 jscratch.interpreteur.parser
+jscratch.lang
 jscratch.modeles.sim
 jscratch.modeles.sim.collision
 jscratch.parametrages.langue
@@ -35,6 +36,7 @@ jscratch.vue.ginterface.principales
 jscratch.vue.ginterface.principales.panels
 jscratch.vue.ginterface.principales.popups
 jscratch.vue.ginterface.principales.selecteur
+jscratch.vue.itemlist
 jscratch.vue.sim
 jscratch.vue.widgets
 jscratch.vue.widgets.fabrique
@@ -44,3 +46,7 @@ nxtim
 nxtim.exception
 nxtim.instruction
 nxtim.instruction.validation
+nxtim.operateur
+nxtim.operateur.exception
+nxtim.type
+nxtim.type.exception
