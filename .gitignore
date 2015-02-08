@@ -13,3 +13,5 @@ bin/
 traces.xml
 save*.xml
 *.properties
+test/build/
+test/reports/
