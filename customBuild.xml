@@ -113,6 +113,13 @@
 		<delete dir="${test.reports.data.dir}" />
 	</target>
 	
+	<target name="zip" depends="dist" description="Crée une archive zip de distribution du projet" >
+		<zip destfile="${dist.dir}/${app.name}.zip" basedir="${dist.dir}" >
+			<include name="**/*" />
+			<exclude name="${app.name}.zip"/>
+		</zip>
+	</target>
+
 	<target name="doc">
 		<delete dir="${doc.dir}" />
 		<mkdir dir="${doc.dir}" />
