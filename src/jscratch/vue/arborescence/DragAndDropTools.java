@@ -132,58 +132,27 @@ public final class DragAndDropTools extends Observable {
 		deplacement = comp.isDraggable();
 
 		// Est-ce que l'on a cliqué sur un widget de la liste des widgets ?
-		if (!comp.isDraggable()) { // Oui donc on clone
-			comp.setDraggable(true);
-			Widget compNouv;
-
-			// Si c'est la tache main, on supprime le widget du panel
-			if (comp.getType() == TypeModeleWidget.TACHE) {
-				PanelTypeWidget.getInstance().supprimerTachePrincipale();
-			}
-			else { // sinon on remplace par un nouveau widget
-				try {
-					PanelWidget pw = GUI.getPanelWidget();
-					compNouv = pw.getFabrique().cloner(comp);
-					int ind = pw.getIndex(comp);
-					pw.supprimerWidget(comp);
-					pw.ajouterWidget(compNouv, ind);
-					DicoWidgetsCategories.getInstance().remplacerWidgetDansCategorie(GUI.getPanelTypeWidget().getCurrentCategorie(), comp, compNouv);
-				} catch (NonClonableException ex) {
-					ErreurHelper.afficher(ex);
-				}
-			}
-			composantsDrague = new LinkedList<Widget>();
-			composantsDrague.add(comp);
-
+		if (!deplacement) { // Oui
+			clickWidgetOfListWidgets(comp);
 		} else { // Non, il s'agit d'un widget dans la zone d'édition
-			try {
-				//recuperation et detachement des widgets dragués
-				composantsDrague = new LinkedList<Widget>(arbo.getSuivants(comp, true));
-
-				//supression des widgets dans l'arborescence
-				arbo.supprimerWidgets(composantsDrague);
-
-				if ((comp != null) && (comp.parent() != null) && (!comp.parent().isRacine())) {
-					((Widget) comp.parent()).applyChangeModele();
-				}
-
-				comp.defParent(null);
-
-			} catch (ComposantIntrouvableException ex) {
-				ErreurHelper.afficher(ex);
-			}
+			clickWidgetOfEditor(comp);
 		}
 
+		// Déplacer l'ensemble des composants à dragguer sur le GlassPane
 		for (Widget w : composantsDrague) {
 			passerSurAutrePanel(w, GUI.getGlassPane());
 		}
-
+		// Puis affiché le GlassPane
 		GUI.getGlassPane().setVisible(true);
 
+		/* 
+		 * Calculer la position sur le GlassPane des composants draggués correspondante à celle sur leur ancien containeur
+		 * de manière à ce qu'elle reste la même par rapport à la souris (et donc à l'écran).
+		 */
 		Point p = GUI.getGlassPane().getMousePosition();
 		p.x -= ptClick.x;
 		p.y -= ptClick.y;
-
+		
 		dragGroupeWidget(composantsDrague, p);
 
 		arbo.updateWidgets();
@@ -191,6 +160,61 @@ public final class DragAndDropTools extends Observable {
 		GUI.getPanelCodeGraphique().updateSize(arbo.getArborescence());
 		this.setChanged();
 		this.notifyObservers();
+	}
+	
+	/**
+	 * Traitement lors du clic sur un widget de la liste des widgets
+	 * 
+	 * @param comp le composant sur lequel on a cliqué.
+	 */
+	private void clickWidgetOfListWidgets(Widget comp) {
+		comp.setDraggable(true);
+		Widget compNouv;
+
+		// Si c'est la tache main, on supprime le widget du panel
+		if (comp.getType() == TypeModeleWidget.TACHE) {
+			PanelTypeWidget.getInstance().supprimerTachePrincipale();
+		}
+		else { // sinon on remplace par un nouveau widget
+			try {
+				PanelWidget pw = GUI.getPanelWidget();
+				// Le nouveau est un clone du compsosant draggué
+				compNouv = pw.getFabrique().cloner(comp);
+				int ind = pw.getIndex(comp);
+				pw.supprimerWidget(comp);
+				pw.ajouterWidget(compNouv, ind);
+				DicoWidgetsCategories.getInstance().remplacerWidgetDansCategorie(GUI.getPanelTypeWidget().getCurrentCategorie(), comp, compNouv);
+			} catch (NonClonableException ex) {
+				ErreurHelper.afficher(ex);
+			}
+		}
+		composantsDrague = new LinkedList<Widget>();
+		composantsDrague.add(comp);
+	}
+	
+	/**
+	 * Traitement lors du clic sur un widget de la zone d'édition.
+	 * 
+	 * @param comp le composant sur lequel on a cliqué.
+	 */
+	private void clickWidgetOfEditor(Widget comp) {
+		ArborescenceTools arbo = ArborescenceTools.getInstance();
+		try {
+			//recuperation et detachement des widgets dragués
+			composantsDrague = new LinkedList<Widget>(arbo.getSuivants(comp, true));
+
+			//supression des widgets dans l'arborescence
+			arbo.supprimerWidgets(composantsDrague);
+
+			if ((comp != null) && (comp.parent() != null) && (!comp.parent().isRacine())) {
+				((Widget) comp.parent()).applyChangeModele();
+			}
+
+			comp.defParent(null);
+
+		} catch (ComposantIntrouvableException ex) {
+			ErreurHelper.afficher(ex);
+		}	
 	}
 
 	/**

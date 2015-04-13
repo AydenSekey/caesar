@@ -63,7 +63,7 @@ import nxtim.instruction.Categorie;
  */
 public abstract class ModeleWidget implements Serializable {
     
-	/*
+	/**
      * Constante donnant la hauteur du "décrochement" des widgets.
      */
     public static final int OFFSET = 5;
