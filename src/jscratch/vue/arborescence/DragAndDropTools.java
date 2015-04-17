@@ -267,7 +267,7 @@ public final class DragAndDropTools extends Observable {
 	public void dragWidget(Widget comp) {
 		if (comp.isDraggable()) {
 			Point ptClick = comp.getPtClick();
-			Point p = MouseInfo.getPointerInfo().getLocation();
+			Point pMouse = MouseInfo.getPointerInfo().getLocation();
 			Point diff = new Point((int)(GUI.getZoneUtilisateur().getLocationOnScreen().getX() - GUI.getFenetre().getViewport().getLocationOnScreen().getX() + 5),(int)(GUI.getZoneUtilisateur().getLocationOnScreen().getY() - GUI.getFenetre().getViewport().getLocationOnScreen().getY() + 5));
 			Rectangle recZoneUtil = new Rectangle((int)(GUI.getZoneUtilisateur().getLocationOnScreen().getX() - diff.getX()), (int)(GUI.getZoneUtilisateur().getLocationOnScreen().getY() - diff.getY()), GUI.getZoneUtilisateur().getWidth(), GUI.getZoneUtilisateur().getHeight());
 			Rectangle boundsGroup = groupeWidgetBounds(composantsDrague, 0, null);
@@ -275,43 +275,43 @@ public final class DragAndDropTools extends Observable {
 				boundsGroup = new Rectangle();
 			}
 
-			Rectangle recWid = new Rectangle(new Point((int) (MouseInfo.getPointerInfo().getLocation().x - ptClick.getX() - diff.getX()), (int) (MouseInfo.getPointerInfo().getLocation().y - ptClick.getY()- diff.getY())), new Dimension((int) boundsGroup.getWidth(), (int) boundsGroup.getHeight()));
+			Rectangle recWid = new Rectangle(new Point((int) (pMouse.x - ptClick.getX() - diff.getX()), (int) (pMouse.y - ptClick.getY()- diff.getY())), new Dimension((int) boundsGroup.getWidth(), (int) boundsGroup.getHeight()));
 			recZoneUtil.setBounds(recZoneUtil.getBounds().x, recZoneUtil.getBounds().y, recZoneUtil.getBounds().width, recZoneUtil.getBounds().height);
 
 			if (!recZoneUtil.contains(recWid)) {
 				boolean noX = false;
 				if (recWid.getMinX() <= recZoneUtil.getMinX()) {
 					// A gauche
-					p.x = (int) recZoneUtil.getMinX();
-					p.y -= ptClick.y + diff.getY();
+					pMouse.x = (int) recZoneUtil.getMinX();
+					pMouse.y -= ptClick.y + diff.getY();
 					noX = true;
 				} else if (recWid.getMaxX() > recZoneUtil.getMaxX()) {
 					// A droite
-					p.x = (int) recZoneUtil.getMaxX() - recWid.width;
-					p.y -= ptClick.y + diff.getY();
+					pMouse.x = (int) recZoneUtil.getMaxX() - recWid.width;
+					pMouse.y -= ptClick.y + diff.getY();
 					noX = true;
 				}
 
 				if (recWid.getMinY()<= recZoneUtil.getMinY()) {
 					// En haut
-					p.y = (int) recZoneUtil.getMinY();
+					pMouse.y = (int) recZoneUtil.getMinY();
 					if (!noX) {
-						p.x -= ptClick.x + diff.getX();
+						pMouse.x -= ptClick.x + diff.getX();
 					}
 				} else if (recWid.getMaxY() >= recZoneUtil.getMaxY()) {
 					// En bas
-					p.y = (int) recZoneUtil.getMaxY() - recWid.height;
+					pMouse.y = (int) recZoneUtil.getMaxY() - recWid.height;
 					if (!noX) {
-						p.x -= ptClick.x + diff.getX();
+						pMouse.x -= ptClick.x + diff.getX();
 					}
 				}
 			} else {
-				p.x -= ptClick.x + diff.getX();
-				p.y -= ptClick.y + diff.getY();
+				pMouse.x -= ptClick.x + diff.getX();
+				pMouse.y -= ptClick.y + diff.getY();
 			}
-			p.x -= GUI.getFenetre().getLocation().getX();
-			p.y -= GUI.getFenetre().getLocation().getY();
-			dragGroupeWidget(composantsDrague, p);
+			pMouse.x -= GUI.getFenetre().getLocation().getX();
+			pMouse.y -= GUI.getFenetre().getLocation().getY();
+			dragGroupeWidget(composantsDrague, pMouse);
 
 			this.setChanged();
 			this.notifyObservers();
