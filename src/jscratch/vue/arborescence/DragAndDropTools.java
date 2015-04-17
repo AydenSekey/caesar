@@ -276,7 +276,6 @@ public final class DragAndDropTools extends Observable {
 			}
 
 			Rectangle recWid = new Rectangle(new Point((int) (pMouse.x - ptClick.getX() - diff.getX()), (int) (pMouse.y - ptClick.getY()- diff.getY())), new Dimension((int) boundsGroup.getWidth(), (int) boundsGroup.getHeight()));
-			recZoneUtil.setBounds(recZoneUtil.getBounds().x, recZoneUtil.getBounds().y, recZoneUtil.getBounds().width, recZoneUtil.getBounds().height);
 
 			if (!recZoneUtil.contains(recWid)) {
 				boolean noX = false;
