@@ -275,49 +275,61 @@ public final class DragAndDropTools extends Observable {
 				boundsGroup = new Rectangle();
 			}
 
+			// Récupération de la future hitbox du widget draggué par rapport à l'écran 
 			Rectangle recWid = new Rectangle(new Point((int) (pMouse.x - ptClick.getX() - diff.getX()), (int) (pMouse.y - ptClick.getY()- diff.getY())), new Dimension((int) boundsGroup.getWidth(), (int) boundsGroup.getHeight()));
 
 			if (!recZoneUtil.contains(recWid)) {
+				// La futur hitbox n'est pas entièrement dans la ZoneUtil
 				boolean noX = false;
 				if (recWid.getMinX() <= recZoneUtil.getMinX()) {
-					// A gauche
+					// Dépasse à gauche de la ZoneUtil
 					pMouse.x = (int) recZoneUtil.getMinX();
 					pMouse.y -= ptClick.y + diff.getY();
 					noX = true;
 				} else if (recWid.getMaxX() > recZoneUtil.getMaxX()) {
-					// A droite
+					// Dépasse à droite de la ZoneUtil
 					pMouse.x = (int) recZoneUtil.getMaxX() - recWid.width;
 					pMouse.y -= ptClick.y + diff.getY();
 					noX = true;
 				}
 
 				if (recWid.getMinY()<= recZoneUtil.getMinY()) {
-					// En haut
+					// Dépasse en haut de la ZoneUtil
 					pMouse.y = (int) recZoneUtil.getMinY();
 					if (!noX) {
 						pMouse.x -= ptClick.x + diff.getX();
 					}
 				} else if (recWid.getMaxY() >= recZoneUtil.getMaxY()) {
-					// En bas
+					// Dépasse en bas de la ZoneUtil
 					pMouse.y = (int) recZoneUtil.getMaxY() - recWid.height;
 					if (!noX) {
 						pMouse.x -= ptClick.x + diff.getX();
 					}
 				}
 			} else {
+				// La future hitbox est entièrement dans la ZoneUtil
 				pMouse.x -= ptClick.x + diff.getX();
 				pMouse.y -= ptClick.y + diff.getY();
 			}
+			// Transformation du point dans le référentiel de l'écran en un point du référenciel de la fenêtre.
 			pMouse.x -= GUI.getFenetre().getLocation().getX();
 			pMouse.y -= GUI.getFenetre().getLocation().getY();
+
+			// Déplacement des composants draggués à la nouvelle position.
 			dragGroupeWidget(composantsDrague, pMouse);
 
 			this.setChanged();
 			this.notifyObservers();
+
 			int decal = (int) (Widget.TAUX_TRANSFERT_PANEL * comp.getWidth());
 			int inter = (int) (boundsGroup.getMaxX() - GUI.getPanelCodeGraphique().getScroll().getBounds().getMinX());
 			GlassPane g = GUI.getGlassPane();
 			if (inter < decal) {
+				/*
+				 * Le groupe de widgets draggués dépasse sur la gauche du panneau d'édition grahique
+				 * de plus du ratio toléré pour le considérer comme encore sur ce panneau.
+				 * On indique que s'il y a drop, les composants seront supprimés.
+				 */
 				Point ptDel = new Point(comp.getLocation());
 				ptDel.translate(-20, -20);
 				g.setDeleteIconPosition(ptDel);
@@ -325,7 +337,6 @@ public final class DragAndDropTools extends Observable {
 				g.setDeleteIconPosition(null);
 			}
 			FusionTools.dessinerIndicateursFusion(comp);
-
 		}
 	}
 
