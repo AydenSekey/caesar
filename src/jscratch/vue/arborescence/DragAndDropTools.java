@@ -321,7 +321,7 @@ public final class DragAndDropTools extends Observable {
 			this.setChanged();
 			this.notifyObservers();
 
-			int decal = (int) (Widget.TAUX_TRANSFERT_PANEL * comp.getWidth());
+			int decal = margeTransfertWidget(comp);
 			int inter = (int) (boundsGroup.getMaxX() - GUI.getPanelCodeGraphique().getScroll().getBounds().getMinX());
 			GlassPane g = GUI.getGlassPane();
 			if (inter < decal) {
@@ -345,18 +345,16 @@ public final class DragAndDropTools extends Observable {
 	 * composants.
 	 */
 	public void dropWidget() {
-
-
 		Widget comp = composantsDrague.get(0);
 		Action a = FusionTools.checkSurvolWidgetV2(comp);
 		PanelCodeGraphique p = GUI.getPanelCodeGraphique();
 		GlassPane g = GUI.getGlassPane();
-		Rectangle r = (Rectangle) comp.getBounds().clone();
+		double maxXComp = comp.getBounds().getMaxX();
 
 		Point pt = comp.getLocationOnScreen();
 
-		int decal = (int) (Widget.TAUX_TRANSFERT_PANEL * comp.getWidth());
-		int inter = (int) (r.getMaxX() - p.getScroll().getBounds().getMinX());
+		int decal = margeTransfertWidget(comp);
+		int inter = (int) (maxXComp - p.getScroll().getBounds().getMinX());
 
 		ArborescenceTools arbo = ArborescenceTools.getInstance();
 		boolean complexe = false;
@@ -529,6 +527,16 @@ public final class DragAndDropTools extends Observable {
 
 	}
 
+	/**
+	 * Donne la taille en pixel de la marge de transfert pour un widget.
+	 * 
+	 * @param comp le widget
+	 * @return la marge de transfert.
+	 */
+	private int margeTransfertWidget(Widget comp) {
+		return (int) (Widget.TAUX_TRANSFERT_PANEL * comp.getWidth());
+	}
+	
 	/**
 	 * Méthode récursive permettant de supprimer un widget du GlassPane. Si le
 	 * widget passé en paramètre est de type complexe, cette méthode est de
