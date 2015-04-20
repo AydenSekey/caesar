@@ -278,37 +278,36 @@ public final class DragAndDropTools extends Observable {
 			// Récupération de la future hitbox du widget draggué par rapport à l'écran 
 			Rectangle recWid = new Rectangle(new Point((int) (pMouse.x - ptClick.getX() - diff.getX()), (int) (pMouse.y - ptClick.getY()- diff.getY())), new Dimension((int) boundsGroup.getWidth(), (int) boundsGroup.getHeight()));
 
+			boolean inX = true;
+			boolean inY = true;
 			if (!recZoneUtil.contains(recWid)) {
 				// La futur hitbox n'est pas entièrement dans la ZoneUtil
-				boolean noX = false;
 				if (recWid.getMinX() <= recZoneUtil.getMinX()) {
 					// Dépasse à gauche de la ZoneUtil
 					pMouse.x = (int) recZoneUtil.getMinX();
-					pMouse.y -= ptClick.y + diff.getY();
-					noX = true;
+					inX = false;
 				} else if (recWid.getMaxX() > recZoneUtil.getMaxX()) {
 					// Dépasse à droite de la ZoneUtil
 					pMouse.x = (int) recZoneUtil.getMaxX() - recWid.width;
-					pMouse.y -= ptClick.y + diff.getY();
-					noX = true;
+					inX = false;
 				}
 
 				if (recWid.getMinY()<= recZoneUtil.getMinY()) {
 					// Dépasse en haut de la ZoneUtil
 					pMouse.y = (int) recZoneUtil.getMinY();
-					if (!noX) {
-						pMouse.x -= ptClick.x + diff.getX();
-					}
+					inY = false;
 				} else if (recWid.getMaxY() >= recZoneUtil.getMaxY()) {
 					// Dépasse en bas de la ZoneUtil
 					pMouse.y = (int) recZoneUtil.getMaxY() - recWid.height;
-					if (!noX) {
-						pMouse.x -= ptClick.x + diff.getX();
-					}
+					inY = false;
 				}
-			} else {
-				// La future hitbox est entièrement dans la ZoneUtil
+			} 
+			if(inX) {
+				// La future hitbox est dans la ZoneUtil en abscisse
 				pMouse.x -= ptClick.x + diff.getX();
+			}
+			if(inY) {
+				// La future hitbox est dans la ZoneUtil en ordonnée
 				pMouse.y -= ptClick.y + diff.getY();
 			}
 			// Transformation du point dans le référentiel de l'écran en un point du référenciel de la fenêtre.
