@@ -365,7 +365,6 @@ public final class DragAndDropTools extends Observable {
 				SwingUtilities.convertPointFromScreen(pt, p);
 				if (inter < comp.getWidth()) {
 					pt.x += (comp.getWidth() - inter) + (GUI.getZoneUtilisateur().getLocationOnScreen().getX() - GUI.getFenetre().getViewport().getLocationOnScreen().getX() + 5);
-
 				}
 				compSurvole = a.getComp();
 
@@ -373,8 +372,6 @@ public final class DragAndDropTools extends Observable {
 					Zone z = compSurvole.getModele().getLesZonesSaisies().get(a.getZoneIndex());
 					DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetModification(comp, z, ((ChampTexte) z).getValeur(), composantsDrague.get(0)));
 					((ChampTexte) z).setWidgetContenu(composantsDrague.get(0));
-
-
 				} else {
 					switch (a.getTypeAction()) {
 						case DESSUS:
@@ -387,7 +384,6 @@ public final class DragAndDropTools extends Observable {
 								DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetDeplacement(comp, w1, a.getComp(),empAvant,a.getVal()));
 							}
 							break;
-
 						case DESSOUS:
 							//En dessous du compSurvole
 							Widget w0 = (Widget) (a.getComp());
@@ -398,7 +394,6 @@ public final class DragAndDropTools extends Observable {
 								DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetDeplacement(comp, w0, a.getComp(),empAvant,a.getVal()));
 							}
 							break;
-
 						case RIEN:
 							//Aucun survol
 							Widget w11 = (Widget) (a.getComp());
@@ -409,7 +404,6 @@ public final class DragAndDropTools extends Observable {
 								DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetDeplacement(comp, w11, a.getComp(),empAvant,a.getVal()));
 
 							break;
-
 						case ACCROCHE:
 							//Survol d'une zone d'accroche
 							WidgetCompose wComp = (WidgetCompose) (a.getComp());
@@ -419,19 +413,16 @@ public final class DragAndDropTools extends Observable {
 								DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetAjout(comp, wComp, a.getVal()));
 							else
 								DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetDeplacement(comp, wComp, a.getComp(),empAvant,a.getVal()));
-
 							break;
 						default:
 							break;
 					}
 
 					for (Widget w : composantsDrague) {
-
 						passerSurAutrePanel(w, p);
 
 						if (compSurvole == null) {
 							w.defParent((IWidget) p);//gestion du parent suivant element survole
-
 						} else {
 							//Survol d'une zone d'accroche
 							if (a.getTypeAction() == TypeAction.ACCROCHE) {
@@ -469,7 +460,6 @@ public final class DragAndDropTools extends Observable {
 						pt.y -= (w.getHeight() - ModeleWidget.OFFSET);
 					}
 					break;
-
 				case DESSOUS:
 					//En dessous du compSurvole
 					pt = arbo.getListe(comp).get(0).getLocation();
@@ -483,12 +473,10 @@ public final class DragAndDropTools extends Observable {
 				dragGroupeWidget(arbo.getListe(comp), pt);
 			}
 			composantsDrague.clear();
-
 		} catch (ComposantIntrouvableException ex) {
 			ErreurHelper.afficher(ex);
 		}
 		arbo.updateWidgets();
-
 
 		p.updateSize(arbo.getArborescence());
 
@@ -508,7 +496,6 @@ public final class DragAndDropTools extends Observable {
 				GUI.getPanelTypeWidget().getCurrentCategorie() == Categorie.STRUCTURES) {
 			for (BoutonCategorie bc : PanelTypeWidget.getInstance().getLesCategories()) {
 				if (bc.getCategorie() == Categorie.STRUCTURES) {
-
 					GUI.getPanelWidget().setLesWidgets(bc.getNbColonnes());
 					break;
 				}
@@ -516,7 +503,6 @@ public final class DragAndDropTools extends Observable {
 		}
 
 		LanceurTraduction.getInstance().lancerTraduction();
-
 	}
 
 	/**
