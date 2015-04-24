@@ -443,14 +443,12 @@ public final class DragAndDropTools extends Observable {
 						}
 					}
 
-					if (compSurvole != null && compSurvole.isComplexe()) {
-						if (a.getTypeAction() == TypeAction.ACCROCHE) {
+					if(compSurvole != null) {
+						if (compSurvole.isComplexe() && a.getTypeAction() == TypeAction.ACCROCHE) {
 							((WidgetCompose) compSurvole).applyChangeModele();
 						} else if (compSurvole.parent() != null && !compSurvole.parent().isRacine()) {
-								((WidgetCompose) compSurvole.parent()).applyChangeModele();
+							((WidgetCompose) compSurvole.parent()).applyChangeModele();
 						}
-					} else if (compSurvole != null && !compSurvole.isComplexe() && compSurvole.parent() != null && !compSurvole.parent().isRacine()) {
-						((WidgetCompose) compSurvole.parent()).applyChangeModele();
 					}
 				}
 			} else {
