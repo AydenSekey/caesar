@@ -369,15 +369,15 @@ public final class DragAndDropTools extends Observable {
 				}
 				compSurvole = a.getComp();
 
-				if (a.getVal() == TypeAction.INTERNE.toInt()) {
+				if (a.getTypeAction() == TypeAction.INTERNE) {
 					Zone z = compSurvole.getModele().getLesZonesSaisies().get(a.getZoneIndex());
 					DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetModification(comp, z, ((ChampTexte) z).getValeur(), composantsDrague.get(0)));
 					((ChampTexte) z).setWidgetContenu(composantsDrague.get(0));
 
 
 				} else {
-					switch (a.getVal()) {
-						case 1:
+					switch (a.getTypeAction()) {
+						case DESSUS:
 							//Au dessus du compSurvole
 							Widget w1 = (Widget) (a.getComp());
 							arbo.ajouterWidgets(composantsDrague, compSurvole, false);
@@ -388,7 +388,7 @@ public final class DragAndDropTools extends Observable {
 							}
 							break;
 
-						case 0:
+						case DESSOUS:
 							//En dessous du compSurvole
 							Widget w0 = (Widget) (a.getComp());
 							arbo.ajouterWidgets(composantsDrague, compSurvole, true);
@@ -399,7 +399,7 @@ public final class DragAndDropTools extends Observable {
 							}
 							break;
 
-						case -1:
+						case RIEN:
 							//Aucun survol
 							Widget w11 = (Widget) (a.getComp());
 							arbo.ajouterWidgets(composantsDrague, compSurvole, true);
@@ -410,7 +410,7 @@ public final class DragAndDropTools extends Observable {
 
 							break;
 
-						case 2:
+						case ACCROCHE:
 							//Survol d'une zone d'accroche
 							WidgetCompose wComp = (WidgetCompose) (a.getComp());
 							List<Widget> lst = wComp.getMapZone().get(a.getRect());
@@ -421,7 +421,8 @@ public final class DragAndDropTools extends Observable {
 								DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetDeplacement(comp, wComp, a.getComp(),empAvant,a.getVal()));
 
 							break;
-
+						default:
+							break;
 					}
 
 					for (Widget w : composantsDrague) {
@@ -433,7 +434,7 @@ public final class DragAndDropTools extends Observable {
 
 						} else {
 							//Survol d'une zone d'accroche
-							if (a.getVal() == 2) {
+							if (a.getTypeAction() == TypeAction.ACCROCHE) {
 								complexe = true;
 								w.defParent((WidgetCompose) compSurvole);
 							} else {
@@ -443,30 +444,23 @@ public final class DragAndDropTools extends Observable {
 					}
 
 					if (compSurvole != null && compSurvole.isComplexe()) {
-						//((WidgetCompose) compSurvole).applyChangeModele();
-						if (a.getVal() == 2) {
+						if (a.getTypeAction() == TypeAction.ACCROCHE) {
 							((WidgetCompose) compSurvole).applyChangeModele();
-
-						} else {
-							if (compSurvole.parent() != null && !compSurvole.parent().isRacine()) {
+						} else if (compSurvole.parent() != null && !compSurvole.parent().isRacine()) {
 								((WidgetCompose) compSurvole.parent()).applyChangeModele();
-
-							}
 						}
 					} else if (compSurvole != null && !compSurvole.isComplexe() && compSurvole.parent() != null && !compSurvole.parent().isRacine()) {
 						((WidgetCompose) compSurvole.parent()).applyChangeModele();
-
 					}
 				}
-
 			} else {
 				arbo.supprimerWidgets(composantsDrague);
 				for (Widget w : composantsDrague) {
 					deleteWidgetsFromGlassPane(w);
 				}
 			}
-			switch (a.getVal()) {
-				case 1:
+			switch (a.getTypeAction()) {
+				case DESSUS:
 					//Au dessus du compSurvole
 					Rectangle bnds = groupeWidgetBounds(arbo.getListe(comp), composantsDrague.size(), null);
 					if (bnds == null) {
@@ -478,11 +472,12 @@ public final class DragAndDropTools extends Observable {
 					}
 					break;
 
-				case 0:
+				case DESSOUS:
 					//En dessous du compSurvole
 					pt = arbo.getListe(comp).get(0).getLocation();
 					break;
-
+				default:
+					break;
 			}
 			if (complexe) {
 				dragGroupeWidget(arbo.getSuivants((Widget) (comp.parent()), true), ((Widget) comp.parent()).getLocation());
