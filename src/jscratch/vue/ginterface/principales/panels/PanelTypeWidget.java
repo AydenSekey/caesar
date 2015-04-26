@@ -45,10 +45,12 @@ import jscratch.vue.categories.boutons.BoutonCategorie;
 import jscratch.vue.categories.boutons.BoutonCategorieStructure;
 
 import java.awt.Dimension;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+
 import jscratch.dictionnaires.DicoBoutonsCategories;
 import jscratch.parametrages.properties.VariableProperties;
 import nxtim.instruction.Categorie;
@@ -72,7 +74,7 @@ public final class PanelTypeWidget extends JPanel {
 	private PanelTypeWidget() {
 		this.setBorder(BorderFactory.createTitledBorder("Catégories"));
 
-		this.lesCategories = new LinkedList<BoutonCategorie>();
+		this.lesCategories = new ArrayList<BoutonCategorie>();
 		this.lesCategories.addAll(DicoBoutonsCategories.getInstance().getBoutons());
 
 		this.setLayout(null);
@@ -119,7 +121,7 @@ public final class PanelTypeWidget extends JPanel {
 	/**
 	 * Permet de connaître la catégorie active.
 	 * 
-	 * @return la categorie sélectionnée ou null si aucune n'est sélectionnée.
+	 * @return la categorie sélectionnée ou <code>null</code> si aucune n'est sélectionnée.
 	 */
 	public Categorie getCurrentCategorie() {
 		for (BoutonCategorie bc : this.getLesCategories()) {
@@ -134,25 +136,34 @@ public final class PanelTypeWidget extends JPanel {
 	 * Supression de la tache principale
 	 */
 	public void supprimerTachePrincipale() {
-		for (BoutonCategorie bc : lesCategories) {
-			if (bc.getCategorie() == Categorie.STRUCTURES) {
-				((BoutonCategorieStructure) bc).supprimerTachePrincipale();				
-				
-				break;
-			}
-		}		
+		BoutonCategorieStructure bc = (BoutonCategorieStructure) getBoutonCategorie(Categorie.STRUCTURES);
+		if(bc != null)
+			bc.supprimerTachePrincipale();
 	}
 	
 	/**
 	 * Ajout de la tache principale
 	 */
 	public void ajouterTachePrincipale() {
-		for (BoutonCategorie bc : lesCategories) {
-			if (bc.getCategorie() == Categorie.STRUCTURES) {
-				((BoutonCategorieStructure) bc).ajouterTachePrincipale();
-				
+		BoutonCategorieStructure bc = (BoutonCategorieStructure) getBoutonCategorie(Categorie.STRUCTURES);
+		if(bc != null)
+			bc.ajouterTachePrincipale();
+	}
+	
+	/**
+	 * Accède au bouton d'une catégorie.
+	 * 
+	 * @param categorie la catégorie
+	 * @return le bouton de la catégorie ou <code>null</code> si aucun bouton n'existe pour la catégorie.
+	 */
+	public BoutonCategorie getBoutonCategorie(Categorie categorie) {
+		BoutonCategorie bouton = null;
+		for(BoutonCategorie bc : lesCategories) {
+			if(bc.getCategorie() == categorie) {
+				bouton = bc;
 				break;
 			}
 		}
+		return bouton;
 	}
 }

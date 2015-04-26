@@ -494,12 +494,9 @@ public final class DragAndDropTools extends Observable {
 		// Suppression de la tache principale de la liste des widgets
 		if (comp.getType() == TypeModeleWidget.TACHE &&
 				GUI.getPanelTypeWidget().getCurrentCategorie() == Categorie.STRUCTURES) {
-			for (BoutonCategorie bc : PanelTypeWidget.getInstance().getLesCategories()) {
-				if (bc.getCategorie() == Categorie.STRUCTURES) {
-					GUI.getPanelWidget().setLesWidgets(bc.getNbColonnes());
-					break;
-				}
-			}
+			BoutonCategorie bouton = PanelTypeWidget.getInstance().getBoutonCategorie(Categorie.STRUCTURES);
+			if(bouton != null)
+					GUI.getPanelWidget().setLesWidgets(bouton.getNbColonnes());
 		}
 
 		LanceurTraduction.getInstance().lancerTraduction();
