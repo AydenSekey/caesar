@@ -397,7 +397,7 @@ public final class DragAndDropTools extends Observable {
 						case RIEN:
 							//Aucun survol
 							Widget w11 = a.getComp();
-							arbo.ajouterWidgets(composantsDrague, compSurvole, true);
+							arbo.ajouterWidgets(composantsDrague);
 							if(!deplacement)
 								DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetAjout(comp, w11, a.getVal()));
 							else

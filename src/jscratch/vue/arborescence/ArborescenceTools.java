@@ -163,33 +163,33 @@ public final class ArborescenceTools {
 	 * (comp) un autre groupe de widgets.
 	 *
 	 * @param l La liste de widgets à insérer dans le groupe du widget comp
-	 * @param comp Le widget au groupe duquel on veut ajouter la liste de
-	 * widgets
-	 * @param insererApres Permet de définir si on veut ajouter la groupe de
-	 * widgets avant ou après le widget passé en paramètre
-	 * @return Le résultat de l'ajout de la liste de widgets au sein du groupe
-	 * de widgets de comp
-	 * @throws ComposantIntrouvableException Si le widget passé en paramètre est
-	 * introuvable dans l'arborescence
+	 * @param comp Le widget du groupe auprès duquel on veut ajouter la liste de widgets, si <code>null</code> la liste est ajoutée à un nouveau groupe.
+	 * @param insererApres Permet de définir si on veut ajouter la groupe de widgets avant ou après le widget passé en paramètre
+	 * @return Le résultat de l'ajout de la liste de widgets au sein du groupe de widgets de comp
+	 * @throws ComposantIntrouvableException Si le widget passé en paramètre est introuvable dans l'arborescence
 	 */
 	public boolean ajouterWidgets(final List<Widget> l, final Widget comp, final boolean insererApres) throws ComposantIntrouvableException {
-
 		//cas de non survol
 		if (comp == null) {
-
-			List<Widget> lst = new LinkedList<Widget>();
-			lst.addAll(l);
-			return arborescence.add(lst);
+			return ajouterWidgets(l);
 		} else {
-
-
 			int index = getIndex(comp);
-
 			if (insererApres) {
 				index++;
 			}
 			return getListe(comp).addAll(index, l);
 		}
+	}
+	
+	/**
+	 * Ajoute un groupe de Widgets à un nouveau groupe de Widgets.
+	 * @param l le groupe à ajouter.
+	 * @return <code>true</code> si le groupe est ajouté.
+	 */
+	public boolean ajouterWidgets(final List<Widget> l) {
+		List<Widget> lst = new LinkedList<Widget>();
+		lst.addAll(l);
+		return arborescence.add(lst);
 	}
 
 	/**
