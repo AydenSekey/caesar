@@ -346,23 +346,23 @@ public final class DragAndDropTools extends Observable {
 	public void dropWidget() {
 		Widget comp = composantsDrague.get(0);
 		Action a = FusionTools.checkSurvolWidgetV2(comp);
-		PanelCodeGraphique p = GUI.getPanelCodeGraphique();
+		PanelCodeGraphique panCodeGraph = GUI.getPanelCodeGraphique();
 		GlassPane g = GUI.getGlassPane();
 		double maxXComp = comp.getBounds().getMaxX();
 
 		Point pt = comp.getLocationOnScreen();
 
 		int decal = margeTransfertWidget(comp);
-		int inter = (int) (maxXComp - p.getScroll().getBounds().getMinX());
+		int inter = (int) (maxXComp - panCodeGraph.getScroll().getBounds().getMinX());
 
 		ArborescenceTools arbo = ArborescenceTools.getInstance();
 		boolean complexe = false;
 		Widget compSurvole = null;
 		try {
 			if (inter >= decal) {
-				p.add(comp);
+				panCodeGraph.add(comp);
 
-				SwingUtilities.convertPointFromScreen(pt, p);
+				SwingUtilities.convertPointFromScreen(pt, panCodeGraph);
 				if (inter < comp.getWidth()) {
 					pt.x += (comp.getWidth() - inter) + (GUI.getZoneUtilisateur().getLocationOnScreen().getX() - GUI.getFenetre().getViewport().getLocationOnScreen().getX() + 5);
 				}
@@ -376,7 +376,7 @@ public final class DragAndDropTools extends Observable {
 					switch (a.getTypeAction()) {
 						case DESSUS:
 							//Au dessus du compSurvole
-							Widget w1 = (Widget) (a.getComp());
+							Widget w1 = a.getComp();
 							arbo.ajouterWidgets(composantsDrague, compSurvole, false);
 							if(!deplacement){
 								DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetAjout(comp, w1, a.getVal()));
@@ -386,7 +386,7 @@ public final class DragAndDropTools extends Observable {
 							break;
 						case DESSOUS:
 							//En dessous du compSurvole
-							Widget w0 = (Widget) (a.getComp());
+							Widget w0 = a.getComp();
 							arbo.ajouterWidgets(composantsDrague, compSurvole, true);
 							if(!deplacement){
 								DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetAjout(comp, w0, a.getVal()));
@@ -396,13 +396,12 @@ public final class DragAndDropTools extends Observable {
 							break;
 						case RIEN:
 							//Aucun survol
-							Widget w11 = (Widget) (a.getComp());
+							Widget w11 = a.getComp();
 							arbo.ajouterWidgets(composantsDrague, compSurvole, true);
 							if(!deplacement)
 								DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetAjout(comp, w11, a.getVal()));
 							else
 								DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetDeplacement(comp, w11, a.getComp(),empAvant,a.getVal()));
-
 							break;
 						case ACCROCHE:
 							//Survol d'une zone d'accroche
@@ -419,10 +418,10 @@ public final class DragAndDropTools extends Observable {
 					}
 
 					for (Widget w : composantsDrague) {
-						passerSurAutrePanel(w, p);
+						passerSurAutrePanel(w, panCodeGraph);
 
 						if (compSurvole == null) {
-							w.defParent((IWidget) p);//gestion du parent suivant element survole
+							w.defParent(panCodeGraph);//gestion du parent suivant element survole
 						} else {
 							//Survol d'une zone d'accroche
 							if (a.getTypeAction() == TypeAction.ACCROCHE) {
@@ -478,7 +477,7 @@ public final class DragAndDropTools extends Observable {
 		}
 		arbo.updateWidgets();
 
-		p.updateSize(arbo.getArborescence());
+		panCodeGraph.updateSize(arbo.getArborescence());
 
 		this.setChanged();
 		this.notifyObservers();
