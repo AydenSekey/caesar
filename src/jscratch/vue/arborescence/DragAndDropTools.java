@@ -360,6 +360,8 @@ public final class DragAndDropTools extends Observable {
 		Widget compSurvole = null;
 		try {
 			if (inter >= decal) {
+				// Le composant est verticalement en partie dans le panneau de code graphique de plus de la marge de transfert
+				// (ou à droite du panneau mais c'est normalement impossible)
 				panCodeGraph.add(comp);
 
 				SwingUtilities.convertPointFromScreen(pt, panCodeGraph);
@@ -373,49 +375,7 @@ public final class DragAndDropTools extends Observable {
 					DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetModification(comp, z, ((ChampTexte) z).getValeur(), composantsDrague.get(0)));
 					((ChampTexte) z).setWidgetContenu(composantsDrague.get(0));
 				} else {
-					switch (a.getTypeAction()) {
-						case DESSUS:
-							//Au dessus du compSurvole
-							Widget w1 = a.getComp();
-							arbo.ajouterWidgets(composantsDrague, compSurvole, false);
-							if(!deplacement){
-								DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetAjout(comp, w1, a.getVal()));
-							}else{
-								DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetDeplacement(comp, w1, a.getComp(),empAvant,a.getVal()));
-							}
-							break;
-						case DESSOUS:
-							//En dessous du compSurvole
-							Widget w0 = a.getComp();
-							arbo.ajouterWidgets(composantsDrague, compSurvole, true);
-							if(!deplacement){
-								DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetAjout(comp, w0, a.getVal()));
-							}else{
-								DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetDeplacement(comp, w0, a.getComp(),empAvant,a.getVal()));
-							}
-							break;
-						case RIEN:
-							//Aucun survol
-							Widget w11 = a.getComp();
-							arbo.ajouterWidgets(composantsDrague);
-							if(!deplacement)
-								DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetAjout(comp, w11, a.getVal()));
-							else
-								DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetDeplacement(comp, w11, a.getComp(),empAvant,a.getVal()));
-							break;
-						case ACCROCHE:
-							//Survol d'une zone d'accroche
-							WidgetCompose wComp = (WidgetCompose) (a.getComp());
-							List<Widget> lst = wComp.getMapZone().get(a.getRect());
-							lst.addAll(composantsDrague);
-							if(!deplacement)
-								DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetAjout(comp, wComp, a.getVal()));
-							else
-								DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetDeplacement(comp, wComp, a.getComp(),empAvant,a.getVal()));
-							break;
-						default:
-							break;
-					}
+					ajouterWidgetAction(a, comp);
 
 					for (Widget w : composantsDrague) {
 						passerSurAutrePanel(w, panCodeGraph);
@@ -499,6 +459,57 @@ public final class DragAndDropTools extends Observable {
 		}
 
 		LanceurTraduction.getInstance().lancerTraduction();
+	}
+
+	/**
+	 * Ajoute un widget en fonction des informations d'une action.
+	 * @param a les informations de l'action à effectuer
+	 * @param comp le widget à ajouter
+	 * @throws ComposantIntrouvableException si le composant de l'action n'est pas dans l'arborescence des widgets.
+	 */
+	private void ajouterWidgetAction(final Action a, final Widget comp) throws ComposantIntrouvableException {
+		ArborescenceTools arbo = ArborescenceTools.getInstance();
+		Widget compSurvole = a.getComp();
+		switch (a.getTypeAction()) {
+			case DESSUS:
+				//Au dessus du compSurvole
+				arbo.ajouterWidgets(composantsDrague, compSurvole, false);
+				if(!deplacement){
+					DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetAjout(comp, compSurvole, a.getVal()));
+				}else{
+					DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetDeplacement(comp, compSurvole, compSurvole, empAvant,a.getVal()));
+				}
+				break;
+			case DESSOUS:
+				//En dessous du compSurvole
+				arbo.ajouterWidgets(composantsDrague, compSurvole, true);
+				if(!deplacement){
+					DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetAjout(comp, compSurvole, a.getVal()));
+				}else{
+					DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetDeplacement(comp, compSurvole, compSurvole, empAvant,a.getVal()));
+				}
+				break;
+			case RIEN:
+				//Aucun survol
+				arbo.ajouterWidgets(composantsDrague);
+				if(!deplacement)
+					DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetAjout(comp, compSurvole, a.getVal()));
+				else
+					DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetDeplacement(comp, compSurvole, compSurvole, empAvant,a.getVal()));
+				break;
+			case ACCROCHE:
+				//Survol d'une zone d'accroche
+				WidgetCompose wComp = (WidgetCompose) compSurvole;
+				List<Widget> lst = wComp.getMapZone().get(a.getRect());
+				lst.addAll(composantsDrague);
+				if(!deplacement)
+					DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetAjout(comp, wComp, a.getVal()));
+				else
+					DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetDeplacement(comp, wComp, compSurvole, empAvant,a.getVal()));
+				break;
+			default:
+				break;
+		}
 	}
 
 	/**
