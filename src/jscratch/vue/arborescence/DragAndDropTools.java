@@ -344,7 +344,7 @@ public final class DragAndDropTools extends Observable {
 	 * composants.
 	 */
 	public void dropWidget() {
-		Widget comp = composantsDrague.get(0);
+		final Widget comp = composantsDrague.get(0);
 		Action a = FusionTools.checkSurvolWidgetV2(comp);
 		PanelCodeGraphique panCodeGraph = GUI.getPanelCodeGraphique();
 		GlassPane g = GUI.getGlassPane();
@@ -372,8 +372,8 @@ public final class DragAndDropTools extends Observable {
 
 				if (a.getTypeAction() == TypeAction.INTERNE) {
 					Zone z = compSurvole.getModele().getLesZonesSaisies().get(a.getZoneIndex());
-					DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetModification(comp, z, ((ChampTexte) z).getValeur(), composantsDrague.get(0)));
-					((ChampTexte) z).setWidgetContenu(composantsDrague.get(0));
+					DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetModification(comp, z, ((ChampTexte) z).getValeur(), comp));
+					((ChampTexte) z).setWidgetContenu(comp);
 				} else {
 					ajouterWidgetAction(a, comp);
 
