@@ -468,47 +468,38 @@ public final class DragAndDropTools extends Observable {
 	 * @throws ComposantIntrouvableException si le composant de l'action n'est pas dans l'arborescence des widgets.
 	 */
 	private void ajouterWidgetAction(final Action a, final Widget comp) throws ComposantIntrouvableException {
+		boolean ajoutTrace = true;
 		ArborescenceTools arbo = ArborescenceTools.getInstance();
 		Widget compSurvole = a.getComp();
 		switch (a.getTypeAction()) {
 			case DESSUS:
 				//Au dessus du compSurvole
 				arbo.ajouterWidgets(composantsDrague, compSurvole, false);
-				if(!deplacement){
-					DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetAjout(comp, compSurvole, a.getVal()));
-				}else{
-					DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetDeplacement(comp, compSurvole, compSurvole, empAvant,a.getVal()));
-				}
 				break;
 			case DESSOUS:
 				//En dessous du compSurvole
 				arbo.ajouterWidgets(composantsDrague, compSurvole, true);
-				if(!deplacement){
-					DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetAjout(comp, compSurvole, a.getVal()));
-				}else{
-					DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetDeplacement(comp, compSurvole, compSurvole, empAvant,a.getVal()));
-				}
 				break;
 			case RIEN:
 				//Aucun survol
 				arbo.ajouterWidgets(composantsDrague);
-				if(!deplacement)
-					DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetAjout(comp, compSurvole, a.getVal()));
-				else
-					DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetDeplacement(comp, compSurvole, compSurvole, empAvant,a.getVal()));
 				break;
 			case ACCROCHE:
 				//Survol d'une zone d'accroche
 				WidgetCompose wComp = (WidgetCompose) compSurvole;
 				List<Widget> lst = wComp.getMapZone().get(a.getRect());
 				lst.addAll(composantsDrague);
-				if(!deplacement)
-					DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetAjout(comp, wComp, a.getVal()));
-				else
-					DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetDeplacement(comp, wComp, compSurvole, empAvant,a.getVal()));
 				break;
-			default:
+			default: //INTERNE ou autres
+				ajoutTrace = false;
 				break;
+		}
+		// Ajout de trace
+		if(ajoutTrace) {
+			if(!deplacement)
+				DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetAjout(comp, compSurvole, a.getVal()));
+			else
+				DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetDeplacement(comp, compSurvole, compSurvole, empAvant, a.getVal()));
 		}
 	}
 
