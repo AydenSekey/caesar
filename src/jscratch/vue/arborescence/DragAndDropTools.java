@@ -371,9 +371,9 @@ public final class DragAndDropTools extends Observable {
 				compSurvole = a.getComp();
 
 				if (a.getTypeAction() == TypeAction.INTERNE) {
-					Zone z = compSurvole.getModele().getLesZonesSaisies().get(a.getZoneIndex());
-					DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetModification(comp, z, ((ChampTexte) z).getValeur(), comp));
-					((ChampTexte) z).setWidgetContenu(comp);
+					ChampTexte z = (ChampTexte) compSurvole.getModele().getLesZonesSaisies().get(a.getZoneIndex());
+					DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetModification(comp, z, z.getValeur(), comp));
+					z.setWidgetContenu(comp);
 				} else {
 					ajouterWidgetAction(a, comp);
 
