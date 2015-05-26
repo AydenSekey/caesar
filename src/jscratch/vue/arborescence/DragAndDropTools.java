@@ -539,16 +539,12 @@ public final class DragAndDropTools extends Observable {
 	}
 
 	/**
-	 * Méthode permettant de calculer les Dimensions e position d'un groupe de
-	 * widgets.
+	 * Méthode permettant de calculer les Dimensions e position d'un groupe de widgets.
 	 *
-	 * @param lst Le groupe de widgets pour lesquels on veut recupérer les
-	 * dimensions et positions
-	 * @param index L'index à partir duquel on veut commencer à calculer les
-	 * dimensions et positions du groupe
+	 * @param lst Le groupe de widgets pour lesquels on veut recupérer les dimensions et positions
+	 * @param index L'index à partir duquel on veut commencer à calculer les dimensions et positions du groupe
 	 * @param rect Le rectangle utilisé pendant les appels récursifs
-	 * @return Le Rectangle regroupant les positions et dimensions du goupe de
-	 * widgets passé en paramètre ou null si la listede widgets est vide
+	 * @return Le Rectangle regroupant les positions et dimensions du goupe de widgets passé en paramètre ou null si la listede widgets est vide
 	 */
 	public static Rectangle groupeWidgetBounds(List<Widget> lst, int index, Rectangle rect) {
 		for (int i = index; i < lst.size(); i++) {
