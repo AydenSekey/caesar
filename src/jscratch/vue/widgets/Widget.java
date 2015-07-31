@@ -44,6 +44,7 @@ package jscratch.vue.widgets;
 import jscratch.helpers.FontHelper;
 import jscratch.vue.widgets.modeles.ModeleWidget;
 import jscratch.vue.widgets.modeles.zones.Zone;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -54,14 +55,17 @@ import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.JComponent;
 
 import jscratch.vue.widgets.modeles.TypeModeleWidget;
 import nxtim.instruction.IElementProgramme;
+
 import org.jdom2.Attribute;
 import org.jdom2.Element;
+
+import jscratch.vue.draganddrop.DragAndDropTools;
 import jscratch.vue.ginterface.principales.GUI;
-import jscratch.vue.arborescence.DragAndDropTools;
 import jscratch.vue.widgets.modeles.ExpressionArithmeticWidget;
 import jscratch.vue.widgets.modeles.ExpressionLogicalWidget;
 import jscratch.vue.widgets.modeles.IncrementationWidget;

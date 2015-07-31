@@ -39,7 +39,7 @@ Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
 pris connaissance de la licence CeCILL, et que vous en avez accepté les
 termes.
  */
-package jscratch.vue.arborescence;
+package jscratch.vue.draganddrop;
 
 import java.awt.Container;
 import java.awt.Dimension;
@@ -60,6 +60,8 @@ import jscratch.exceptions.NonClonableException;
 import jscratch.helpers.ErreurHelper;
 import jscratch.traces.fabriques.FabriqueTrace;
 import jscratch.traduction.LanceurTraduction;
+import jscratch.vue.arborescence.ArborescenceTools;
+import jscratch.vue.arborescence.FusionTools;
 import jscratch.vue.arborescence.actions.Action;
 import jscratch.vue.arborescence.actions.TypeAction;
 import jscratch.vue.categories.boutons.BoutonCategorie;

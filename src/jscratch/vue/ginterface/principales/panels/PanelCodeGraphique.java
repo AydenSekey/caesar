@@ -46,9 +46,11 @@ import java.awt.Rectangle;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import jscratch.vue.arborescence.DragAndDropTools;
+
+import jscratch.vue.draganddrop.DragAndDropTools;
 import jscratch.vue.widgets.IWidget;
 import jscratch.vue.widgets.Widget;
 
