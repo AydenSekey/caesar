@@ -139,7 +139,9 @@ public final class DragAndDropTools extends Observable {
 		} else { // Non, il s'agit d'un widget dans la zone d'édition
 			clickWidgetOfEditor(comp);
 		}
-
+		
+		// Modifier le flag du widget indiquant qu'il est en train d'être draggué.
+		comp.setDragging(true);
 		// Déplacer l'ensemble des composants à dragguer sur le GlassPane
 		for (Widget w : composantsDrague) {
 			passerSurAutrePanel(w, GUI.getGlassPane());
@@ -267,7 +269,7 @@ public final class DragAndDropTools extends Observable {
 	 * @param comp Le widget où a eu lieu l'événement souris d'origine
 	 */
 	public void dragWidget(Widget comp) {
-		if (comp.isDraggable()) {
+		if (comp.isDraggable() && comp.isDragging()) {
 			Point ptClick = comp.getPtClick();
 			Point pMouse = MouseInfo.getPointerInfo().getLocation();
 			Point diff = new Point((int)(GUI.getZoneUtilisateur().getLocationOnScreen().getX() - GUI.getFenetre().getViewport().getLocationOnScreen().getX() + 5),(int)(GUI.getZoneUtilisateur().getLocationOnScreen().getY() - GUI.getFenetre().getViewport().getLocationOnScreen().getY() + 5));
@@ -408,6 +410,8 @@ public final class DragAndDropTools extends Observable {
 				for (Widget w : composantsDrague) {
 					deleteWidgetsFromGlassPane(w);
 				}
+				// Modifier le flag indiquant que le composant est en cours de drag
+				comp.setDragging(false);
 			}
 			switch (a.getTypeAction()) {
 				case DESSUS:

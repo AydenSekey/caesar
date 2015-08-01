@@ -191,16 +191,13 @@ public class Widget extends JComponent {
 			public void mousePressed(final MouseEvent e) {
 				if (e.getButton() == MouseEvent.BUTTON1) {
 					DragAndDropTools.getInstance().clickWidget((Widget) e.getComponent(), e.getPoint());
-					setDragging(true);
 				}
 			}
 
 			@Override
 			public void mouseReleased(final MouseEvent e) {
-
 				if (e.getButton() == MouseEvent.BUTTON1) {
 					DragAndDropTools.getInstance().dropWidget();
-					setDragging(false);
 				}
 			}
 		});
@@ -208,10 +205,7 @@ public class Widget extends JComponent {
 		this.addMouseMotionListener(new MouseAdapter() {
 			@Override
 			public void mouseDragged(final MouseEvent e) {
-				if (isDragging()) {
-					DragAndDropTools.getInstance().dragWidget((Widget) e.getComponent());
-				}
-
+				DragAndDropTools.getInstance().dragWidget((Widget) e.getComponent());
 			}
 		});
 	}
