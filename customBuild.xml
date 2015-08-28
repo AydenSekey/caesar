@@ -57,7 +57,7 @@
 	<target name="jar_nxtim" depends="compile_nxtim" description="Crée l'archive JAR de NXTIM" >
 		<jar destfile="${jar.dir}/nxtim.jar"
 			basedir="${classes.dir}"
-			includes="nxtim/*.class,nxtim/*/*.class" />
+			includes="nxtim/**/*.class" />
 	</target>
 
 	<target name="jar" depends="compile,jar_nxtim" description="Crée l'archive JAR du projet" >
